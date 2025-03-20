@@ -29,11 +29,24 @@ module.exports = {
                 use: "ts-loader",
                 exclude: /node_modules/,
             },
-        ],
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader', // Injects styles into DOM
+                    'css-loader',   // Turns CSS into CommonJS
+                    'sass-loader',  // Compiles Sass to CSS
+                ],
+            },
+        ]
     },
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
+        alias: {
+            "@components": path.resolve(__dirname, "../src/components"),
+            "@styles": path.resolve(__dirname, "../src/assets/styles"),
+        },
     },
+
     plugins: [
         new CopyPlugin({
             patterns: [{ from: ".", to: "../", context: "public" }],
