@@ -33,7 +33,14 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     'style-loader', // Injects styles into DOM
-                    'css-loader',   // Turns CSS into CommonJS
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                namedExport: false,
+                            },
+                        },
+                    },
                     'sass-loader',  // Compiles Sass to CSS
                 ],
             },
