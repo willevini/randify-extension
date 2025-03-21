@@ -14,7 +14,8 @@
         "baseUrl": "./src",
         "paths": {
             "@components/*": ["components/*"],
-            "@styles/*": ["assets/styles/*"]
+            "@styles/*": ["assets/styles/*"],
+            "@utils/*": ["utils/*"]
         },
         "resolveJsonModule": true,
         "isolatedModules": true
