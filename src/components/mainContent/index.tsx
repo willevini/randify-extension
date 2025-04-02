@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
 
+import {generateCNPJ, generateCPF} from "@utils/generators/cpfCnpj";
+
 import { Button } from "@components/button";
+import { Header } from "@components/header";
 
 import '@styles/global.scss';
-import {generateCNPJ, generateCPF} from "@utils/generators/cpfCnpj";
 
 const MainContent = () => {
 	const [cpf, setCpf] = useState('');
@@ -20,6 +22,7 @@ const MainContent = () => {
 
 	return (
 		<main className="container">
+			<Header />
 			<div>
 				<Button label="Gerar CPF" onClick={() => generateRandomCPF()} />
 				<input type="text" id="cpf" value={cpf} readOnly />
