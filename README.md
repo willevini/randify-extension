@@ -1,70 +1,113 @@
-# Chrome Extension TypeScript Starter
+# Randify Extension
 
-![build](https://github.com/chibat/chrome-extension-typescript-starter/workflows/build/badge.svg)
+Extensão de navegador para gerar dados fictícios de forma rápida durante o desenvolvimento e os testes. Atualmente, a Randify gera **CPF** e **CNPJ** válidos diretamente pelo popup da extensão.
 
-Chrome Extension, TypeScript and Visual Studio Code
+## O que o projeto faz
 
-## Prerequisites
+A ideia da Randify é reduzir o atrito de quem precisa preencher formulários ou testar fluxos que exigem documentos brasileiros. Em vez de sair procurando geradores online, você abre a extensão e gera os valores na hora.
 
-* [node + npm](https://nodejs.org/) (Current Version)
+Hoje o projeto oferece:
 
-## Option
+- Geração de CPF válido
+- Geração de CNPJ válido
+- Interface simples no popup da extensão
+- Base em React + TypeScript para evoluir com novas gerações no futuro
 
-* [Visual Studio Code](https://code.visualstudio.com/)
+## Visão rápida
 
-## Includes the following
+Ao abrir a extensão, o usuário encontra duas ações principais:
 
-* TypeScript
-* Webpack
-* React
-* Jest
-* Example Code
-    * Chrome Storage
-    * Options Version 2
-    * content script
-    * count up badge number
-    * background
+- `Gerar CPF`
+- `Gerar CNPJ`
 
-## Project Structure
+Cada clique gera um novo valor e exibe o resultado em um campo somente leitura.
 
-* src/typescript: TypeScript source files
-* src/assets: static files
-* dist: Chrome Extension directory
-* dist/js: Generated JavaScript files
+## Stack
 
-## Setup
+- React 18
+- TypeScript
+- Webpack
+- Sass
+- Jest
+- Chrome Extension Manifest V3
 
+## Estrutura do projeto
+
+```text
+.
+|- public/
+|  |- manifest.json
+|  |- popup.html
+|  |- options.html
+|- src/
+|  |- components/
+|  |- utils/generators/cpfCnpj.ts
+|  |- popup.tsx
+|  |- options.tsx
+|  |- background.ts
+|  \- content_script.tsx
+|- webpack/
+|  |- webpack.common.js
+|  |- webpack.dev.js
+|  \- webpack.prod.js
+\- dist/
 ```
+
+Arquivos importantes:
+
+- `src/utils/generators/cpfCnpj.ts`: lógica de geração e cálculo dos dígitos verificadores
+- `src/components/mainContent/index.tsx`: interface principal do popup
+- `public/manifest.json`: configuração da extensão
+
+## Requisitos
+
+- Node.js
+- npm
+- Google Chrome ou outro navegador Chromium compatível
+
+## Instalação
+
+```bash
 npm install
 ```
 
-## Import as Visual Studio Code project
+## Desenvolvimento
 
-...
+Para acompanhar as alterações durante o desenvolvimento:
 
-## Build
-
-```
-npm run build
-```
-
-## Build in watch mode
-
-### terminal
-
-```
+```bash
 npm run watch
 ```
 
-### Visual Studio Code
+O build será atualizado na pasta `dist`.
 
-Run watch mode.
+## Build de produção
 
-type `Ctrl + Shift + B`
+```bash
+npm run build
+```
 
-## Load extension to chrome
+## Carregando a extensão no Chrome
 
-Load `dist` directory
+1. Rode o build com `npm run build` ou `npm run watch`
+2. Abra `chrome://extensions`
+3. Ative o **Modo do desenvolvedor**
+4. Clique em **Carregar sem compactação**
+5. Selecione a pasta `dist`
 
-## Test
-`npx jest` or `npm run test`
+Depois disso, a Randify já ficará disponível na barra de extensões do navegador.
+
+## Testes
+
+```bash
+npm test
+```
+
+## Escopo atual
+
+Embora a base do projeto inclua `options`, `background` e `content_script`, o fluxo principal hoje está concentrado no popup da extensão. Isso é normal para esta fase do projeto e deixa um caminho aberto para evoluções como:
+
+- copiar valor com um clique
+- formatação automática de CPF/CNPJ
+- gerar outros dados fictícios
+- preenchimento de campos diretamente em páginas abertas
